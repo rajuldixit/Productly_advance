@@ -1,25 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, lazy, useEffect } from "react";
+import "./App.css";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import Login from "./Pages/Login";
+import useAuth from "./hooks/useAuth";
+const LazyLogin = lazy(() => import("./Pages/Login"));
+const LazyProducts = lazy(() => import("./Pages/Product"));
 
 function App() {
+  const { authResponse } = useAuth(),
+    navigate = useNavigate();
+
+  useEffect(() => {
+    if (!authResponse) {
+      navigate("/login");
+    } else {
+      navigate("/products");
+    }
+  }, [authResponse]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route
+        path="login"
+        element={
+          <Suspense fallback="loading...login">
+            <LazyLogin />
+          </Suspense>
+        }
+      />
+      <Route
+        path="products"
+        element={
+          <Suspense fallback="loading...products">
+            <LazyProducts />
+          </Suspense>
+        }
+      />
+    </Routes>
   );
 }
 
