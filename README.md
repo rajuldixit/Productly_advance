@@ -24,7 +24,7 @@
 
 ### Steps to run
 
-#### We Clone the application by using command : git clone https://github.com/rajuldixit/Productly.git
+#### We Clone the application by using command : git clone https://github.com/rajuldixit/Productly_advance.git
 
 #### Once cloned, it should be in master branch
 
