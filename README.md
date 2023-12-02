@@ -32,4 +32,4 @@
 
 #### After that install the dependencies by using command : npm install
 
-#### Once json-server is up, now we can run the app by using command : npm start
+#### now we can run the app by using command : npm start
